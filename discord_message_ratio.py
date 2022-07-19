@@ -8,6 +8,13 @@ messages in the server.
 import discord
 from discord.ext import commands
 
+#####
+
+IGNORE = [] # Put channels to ignore here
+MAX_DEPTH = 1000000 # Maximum depth to search for messages
+
+#####
+
 # Retireves the bot token
 with open('token.txt', 'r') as file:
     TOKEN = file.read().rstrip()
@@ -18,9 +25,6 @@ INTENTS.members = True
 
 # Initialize the bot
 BOT = commands.Bot(command_prefix="?", intents=INTENTS)
-
-IGNORE = []
-MAX_DEPTH = 100000
 
 @BOT.command()
 async def member_msg_ratio(ctx):
@@ -80,7 +84,7 @@ async def member_msg_ratio(ctx):
         report += f' - {total_char_count} chars were reviewed.\n'
         report += f' - {member_count} members were reviewed.\n'
         report += f' - Participating members average '
-        report += f'{round(total_char_count / active_member_count)} charicters per message\n'
+        report += f'{round(total_char_count / active_member_count)} characters per message\n'
         report += f' - Ignored channels: #{" #".join(IGNORE)}.\n'
 
         await ctx.send(report)
