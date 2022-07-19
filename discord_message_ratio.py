@@ -24,26 +24,26 @@ INTENTS = discord.Intents.default()
 INTENTS.members = True
 
 # Initialize the bot
-BOT = commands.Bot(command_prefix="?", intents=INTENTS)
+bot = commands.Bot(command_prefix="?", intents=INTENTS)
 
-@BOT.command()
+@bot.command()
 async def member_msg_ratio(ctx):
     '''Get all members in the server and their message ratio'''
 
     member_msg_count = {} # Storage for messages and chars per member
 
     # Iterate through servers
-    for guild in BOT.guilds:
+    for guild in bot.guilds:
         await ctx.send(f'[!] This may take a *very* long time!')
 
-        member_count = len([member for member in guild.members if not member.BOT])
+        member_count = len([member for member in guild.members if not member.bot])
         active_member_count = 0
         total_msg_count = 0
         total_char_count = 0
 
         # Populate dictionary with members
         for member in guild.members:
-            if not member.BOT:
+            if not member.bot:
                 member_msg_count[str(member)] = [0, 0]
 
         # Iterate through channels
@@ -53,7 +53,7 @@ async def member_msg_ratio(ctx):
 
                 # Iterate over all messages in the channel (up to MAX_DEPTH)
                 async for message in channel.history(limit=MAX_DEPTH):
-                    if not message.author.BOT: # Exclude bot messages
+                    if not message.author.bot: # Exclude bot messages
                         msg_len = len(message.content)
                         try:
                             member_msg_count[str(message.author)][0] += 1
@@ -93,11 +93,11 @@ async def member_msg_ratio(ctx):
 ###############################################################################
 
 # Connectivity check
-@BOT.command()
+@bot.command()
 async def hello(ctx):
     '''Connectivity test (use this to check if the bot is reachable)'''
 
     await ctx.send('Hello')
 
 # Start the bot
-BOT.run(TOKEN)
+bot.run(TOKEN)

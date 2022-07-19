@@ -16,8 +16,8 @@ Some of this information is expressed in a CSV for graphing and storage purposes
 
  - Python 3, including the `discord` PIP package (`pip3 install discord`)
  - A Discord bot API token; the bot must have the following permissions in your server:
-     - Server members intent
-     - Message content intent
+     - Server Members Intent
+     - Message Content Intent
      - Read message history for every non-ignored channel (see *Usage*)
 
 ## Usage
@@ -27,3 +27,6 @@ Some of this information is expressed in a CSV for graphing and storage purposes
 3. If desired, the following global variables can be modified at the top of `discord_message_ratio.py`:
      - `IGNORE = []`: put channels to ignore here as a list (e.g. `IGNORE = ['private', 'do-not-scan']`)
      - `MAX_DEPTH = 1000000`: maximum depth to search for messages; once this value is reached, any older messages will be skipped and the next channel will be scanned
+
+## Important Disclaimer
+Discord does not expose an official API function to calculate the values this script retrieves. Thus, the calculation is done manually by iterating over every single message using `channel.history`. This means that the number of requests made to Discord's servers can approach very large numbers, scaling 1:1 with the number of messages sent in your server. Discord will begin rate limiting requests after some time, and what's more, the request-response time can vary drastically. The limiting factor in terms of speed for this script is controlled entirely by Discord.
