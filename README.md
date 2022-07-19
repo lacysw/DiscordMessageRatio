@@ -12,6 +12,11 @@ Which members of your Discord server contribute the most? Currently, this script
 
 Some of this information is expressed in a CSV for graphing and storage purposes, with the following headers: `Member, Messages, Chars, AvgCharsPerMessage`.
 
+![Example Output](ExampleOutput.png "Example Output")
+![Example Graph](ExampleGraph.png "Example Graph")
+
+As shown, the data in the CSV may be modeled with Pandas/Matplotlib, Google Sheets, Microsoft Excel, etc.
+
 ## Requirements
 
  - Python 3, including the `discord` PIP package (`pip3 install discord`)
